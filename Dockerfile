@@ -48,3 +48,5 @@ RUN npx tsc
 
 # Set the default command to run your built app
 CMD ["node", "dist/main.js"]
+
+# The pre-built image: docker.io/saladtechnologies/storage-test:0.0.1
