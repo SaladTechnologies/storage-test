@@ -1,0 +1,61 @@
+services:
+  llm-fine-tuning:
+    image: docker.io/saladtechnologies/storage-test:0.0.1
+    container_name: LOCAL001
+    restart: "no"  
+    environment:
+      - SALAD_MACHINE_ID=LOCAL001
+      - SALAD_CONTAINER_GROUP_ID=LOCAL
+
+      - CLOUDFLARE_RESULT_BUCKET=${CLOUDFLARE_RESULT_BUCKET}
+      - CLOUDFLARE_RESULT_FOLDER=${CLOUDFLARE_RESULT_FOLDER}
+      - CLOUDFLARE_RESULT_ID=${CLOUDFLARE_RESULT_ID}
+      - CLOUDFLARE_RESULT_KEY=${CLOUDFLARE_RESULT_KEY}
+      - CLOUDFLARE_RESULT_ENDPOINT_URL=${CLOUDFLARE_RESULT_ENDPOINT_URL}
+
+      - DLSPEED=${DLSPEED}
+      - ULSPEED=${ULSPEED}
+      - RTT=${RTT}
+
+      - CLOUDFLARE_ID=${CLOUDFLARE_ID}
+      - CLOUDFLARE_KEY=${CLOUDFLARE_KEY}
+      - CLOUDFLARE_US_ENDPOINT_URL=${CLOUDFLARE_US_ENDPOINT_URL}
+      - CLOUDFLARE_EU_ENDPOINT_URL=${CLOUDFLARE_EU_ENDPOINT_URL}
+
+      - AWS_ID=${AWS_ID}
+      - AWS_KEY=${AWS_KEY}
+      - AWS_UE2_REGION=${AWS_UE2_REGION}
+      - AWS_EC1_REGION=${AWS_EC1_REGION}
+      - AWS_REQUEST_CHECKSUM_CALCULATION=${AWS_REQUEST_CHECKSUM_CALCULATION}
+      - AWS_RESPONSE_CHECKSUM_VALIDATION=${AWS_RESPONSE_CHECKSUM_VALIDATION}
+
+      - B2_UW4_ID=${B2_UW4_ID}
+      - B2_UW4_KEY=${B2_UW4_KEY}
+      - B2_UW4_ENDPOINT_URL=${B2_UW4_ENDPOINT_URL}
+      - B2_UW4_REGION=${B2_UW4_REGION}
+
+      - B2_UE5_ID=${B2_UE5_ID}
+      - B2_UE5_KEY=${B2_UE5_KEY}
+      - B2_UE5_ENDPOINT_URL=${B2_UE5_ENDPOINT_URL}
+      - B2_UE5_REGION=${B2_UE5_REGION}
+
+      - B2_EC3_ID=${B2_EC3_ID}
+      - B2_EC3_KEY=${B2_EC3_KEY}
+      - B2_EC3_ENDPOINT_URL=${B2_EC3_ENDPOINT_URL}
+      - B2_EC3_REGION=${B2_EC3_REGION}
+
+      - UH_EU0_ID=${UH_EU0_ID}
+      - UH_EU0_KEY=${UH_EU0_KEY}
+      - UH_EU0_ENDPOINT_URL=${UH_EU0_ENDPOINT_URL}
+
+
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+    stdin_open: true
+    tty: true
+    command: ["sh","-c","sleep infinity"]

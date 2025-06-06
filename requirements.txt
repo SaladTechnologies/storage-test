@@ -1,0 +1,5 @@
+python-dotenv 
+speedtest-cli 
+pythonping 
+requests
+boto3
