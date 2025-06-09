@@ -51,12 +51,13 @@ async function main() {
     await appendObjectToFile(myIP, RESULTS_FILE);
 
     const networkInfo = await getNetworkInfo();
+    // console.log('Network Info:', networkInfo);
     if (networkInfo.pass === 'True') {
         //const { Pass, ...restNetworkInfo } = networkInfo; // Remove 'Pass' key before appending
         //await appendObjectToFile(restNetworkInfo, RESULTS_FILE);
         await appendObjectToFile(networkInfo, RESULTS_FILE);
     } else {
-        await reallocate(`Network test failed: ${JSON.stringify(networkInfo)}`, localRun);
+        await reallocate(`Network test failed: ${JSON.stringify(networkInfo)}`, localRun); // Comment for debugging on SaladCloud
     }
 
     const cudaVersion = await getCUDAVersion();
@@ -102,7 +103,8 @@ async function main() {
 
         // console.log(inputs)
         const result = await Test(inputs) ;
-        
+        console.log(result)
+
         if (Object.keys(result).length <= 1) {
             console.error(result)
             console.error(`Failed test case: ${JSON.stringify(inputs)}`);
@@ -110,7 +112,7 @@ async function main() {
         await appendObjectToFile(result, RESULTS_FILE);
     }
 
-
+ 
     // Record end time and duration
     const endTime = new Date();
     const durationMs = endTime.getTime() - startTime.getTime();
@@ -125,7 +127,7 @@ async function main() {
 
     await saveTestResults( RESULTS_FILE,env['salad_machine_id'] )
     
-    await reallocate("The test has been finsihed, and allocate a new node!", localRun);
+    await reallocate("The test has been finsihed, and allocate a new node!", localRun); // Comment for debugging on SaladCloud
     
     /*
     await printFileLines(RESULTS_FILE);

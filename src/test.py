@@ -7,7 +7,7 @@ from boto3.s3.transfer import TransferConfig
 import speedtest
 from pythonping import ping
 from dotenv import load_dotenv
-
+ 
 load_dotenv()
 
 SALAD_MACHINE_ID =  os.getenv("SALAD_MACHINE_ID")
@@ -128,18 +128,23 @@ def network_test():
 # Only the root user can run this code - no issue in containers
 def ping_test(tCount=10):
     if tCount ==0:
-        return g_RTT, g_RTT
+        return g_RTT, g_RTT, g_RTT
     try:
+        # print("To: ec2.us-west-1.amazonaws.com")
+        temp = ping('ec2.us-west-1.amazonaws.com', interval=1, count=tCount, verbose=False)
+        latency_uswest1 = temp.rtt_avg_ms # average of successful pings only     
+    
         # print("To: ec2.us-east-2.amazonaws.com")
         temp = ping('ec2.us-east-2.amazonaws.com', interval=1, count=tCount, verbose=False)
         latency_useast2 = temp.rtt_avg_ms # average of successful pings only     
+
         # print("To: ec2.eu-central-1.amazonaws.com")  
         temp = ping('ec2.eu-central-1.amazonaws.com', interval=1, count=tCount,verbose=False)
         latency_eucentral1 = temp.rtt_avg_ms # average of successful pings only.
     except Exception as e:  
-        return g_RTT, g_RTT
+        return g_RTT, g_RTT, g_RTT
     
-    return latency_useast2, latency_eucentral1
+    return latency_uswest1, latency_useast2, latency_eucentral1
 
 # Not output any messages to stdout
 def Initial_Check():    
@@ -149,14 +154,11 @@ def Initial_Check():
     else:
         # Network test: bandwidth
         country, location, latency, dlspeed, ulspeed = network_test() 
-        if ulspeed < g_ULSPEED or dlspeed < g_DLSPEED: # Node filtering
-            Pass = False
-        else:
-            Pass = True
-        
-        # Network test: latency to some locations
-        latency_us, latency_eu = ping_test(tCount = 10) 
-        if latency_us > g_RTT or latency_eu > g_RTT:
+  
+        # Network test: latency to some locations; should reallocate if ping fails
+        latency_us_w, latency_us_e, latency_eu = ping_test(tCount = 10) 
+
+        if ulspeed < g_ULSPEED or dlspeed < g_DLSPEED or latency_us_w > g_RTT or latency_us_e > g_RTT or latency_eu > g_RTT:
             Pass = False
         else:
             Pass = True
@@ -165,9 +167,10 @@ def Initial_Check():
                         "country":            country,
                         "location":           location,
                         "rtt_ms":             str(latency),
-                        "download_Mbps":      str(dlspeed), 
                         "upload_Mbps":        str(ulspeed),
-                        "rtt_to_us_east1_ms": str(latency_us),
+                        "download_Mbps":      str(dlspeed), 
+                        "rtt_to_us_west1_ms": str(latency_us_w),                        
+                        "rtt_to_us_east2_ms": str(latency_us_e),
                         "rtt_to_eu_cent1_ms": str(latency_eu),
         }
 

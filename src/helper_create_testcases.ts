@@ -17,7 +17,7 @@ export async function readTestCasesFromFile(filename: string = "testCases.txt"):
 
     return testCases;
 }
-
+ 
 // Helper to extract numeric value from size string like "10MB"
 function getSizeMB(size: string): number {
     const match = size.match(/^(\d+)/);
@@ -99,7 +99,7 @@ export async function generateAndSaveTestCases(
 // Run the function if this file is executed directly
 // It does NOT run if you: import './helper_create_testcases'
 if (require.main === module) {
-    const sizeArg = process.argv[2] || "100MB";
+    const sizeArg = process.argv[2] || "300MB";
     generateAndSaveTestCases("testCases.txt", "testCaseSummary.txt", sizeArg).catch(err => {
         console.error('Error generating test cases:', err);
     });

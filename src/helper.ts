@@ -6,6 +6,9 @@ import { randomBytes } from 'crypto';
 
 dotenv.config();
 
+
+
+
 // Create a test file with random data if it does not exist.
 // The file size is specified in MB, e.g., "10M", "20MB" (only M or MB, not KB, GB, MiB or Mi).
 export async function generateFileIfNotExisted(fileSizeMB: string): Promise<void> {
@@ -53,7 +56,7 @@ export async function getSaladCloud(): Promise<Record<string, string>> {
     result['salad_container_group_id'] = process.env.SALAD_CONTAINER_GROUP_ID || 'LOCAL';
     return result;
 }
-
+ 
 // Get public IP address
 export async function getMyIP(): Promise<Record<string, string>> {
     try {
