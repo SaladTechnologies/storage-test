@@ -19,6 +19,12 @@ UH_EU0_ID                  = os.getenv("UH_EU0_ID", "")
 UH_EU0_KEY                 = os.getenv("UH_EU0_KEY", "")
 UH_EU0_ENDPOINT_URL        = os.getenv("UH_EU0_ENDPOINT_URL", "")
 
+# Make sure to set the environment variables for Backblaze B2
+# AWS_REQUEST_CHECKSUM_CALCULATION=when_required
+# AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
+# https://www.backblaze.com/docs/cloud-storage-use-the-aws-sdk-for-python-with-backblaze-b2
+# https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-environment-variables
+
 B2_UW4_ID                  = os.getenv("B2_UW4_ID", "")
 B2_UW4_KEY                 = os.getenv("B2_UW4_KEY", "")
 B2_UW4_ENDPOINT_URL        = os.getenv("B2_UW4_ENDPOINT_URL", "")

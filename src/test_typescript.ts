@@ -40,6 +40,12 @@ const S3Client_UHEU0 = new S3Client({
   forcePathStyle: true, 
 });
 
+// Make sure to set the parameters for Backblaze B2
+// requestChecksumCalculation: "WHEN_REQUIRED"
+// responseChecksumValidation: "WHEN_REQUIRED"
+// https://www.backblaze.com/docs/cloud-storage-use-the-aws-sdk-for-javascript-v3-with-backblaze-b2
+// https://developers.cloudflare.com/r2/examples/aws/aws-sdk-js-v3/
+
 const S3Client_B2UW4 = new S3Client({
   endpoint: B2_UW4_ENDPOINT_URL,
   region: B2_UW4_REGION, 
@@ -265,7 +271,7 @@ export async function downloadTestTS(params: {
     try {
         let nextPart = 0;
  
-        // Called multiple times in parallel
+        // Called 10 times in parallel
         async function downloadNext(): Promise<void> {
             while (true) {
                 const partNumber = nextPart++; // safe for parallel execution, which happens sequentially
@@ -289,8 +295,9 @@ export async function downloadTestTS(params: {
             }
         }
         
-        // Create an array with some slots, 
-        // For each slot, call downloadNext() in parallel
+        // Create an array with 10 slots; for each slot, call downloadNext() in parallel; 
+        // 10 downloadNext functions start at the same time, 
+        // Each downloadNext function keeps grabbing the next available chunk index until partNumber >= partCount (30).
         // 'anything' is just a placeholder, it can be any value which will be replaced by the actual promise returned by downloadNext()
         await Promise.all(Array(concurrencyNum).fill('anything').map( () => downloadNext() ));
     
