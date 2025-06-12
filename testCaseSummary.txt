@@ -1,22 +1,22 @@
-Total upload size (MB): 2400
-Total download size (MB): 2400
+Total upload size (MB): 7200
+Total download size (MB): 7200
 
 Upload size (MB) per remote:
-uheu0: 300
-b2uw4: 300
-b2ue5: 300
-b2ec3: 300
-r2ue2: 300
-r2ec1: 300
-s3ue2: 300
-s3ec1: 300
+uheu0: 900
+b2uw4: 900
+b2ue5: 900
+b2ec3: 900
+r2ue2: 900
+r2ec1: 900
+s3ue2: 900
+s3ec1: 900
 
 Download size (MB) per remote:
-uheu0: 300
-b2uw4: 300
-b2ue5: 300
-b2ec3: 300
-r2ue2: 300
-r2ec1: 300
-s3ue2: 300
-s3ec1: 300
+uheu0: 900
+b2uw4: 900
+b2ue5: 900
+b2ec3: 900
+r2ue2: 900
+r2ec1: 900
+s3ue2: 900
+s3ec1: 900
