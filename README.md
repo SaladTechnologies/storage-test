@@ -1,4 +1,4 @@
-# storage-test
+# storage-test-2025
 
 This repository contains code for running cloud-based storage tests on SaladCloud, gathering key metrics such as throughput and latency, etc.
 
@@ -10,17 +10,17 @@ The [image](https://github.com/SaladTechnologies/storage-test/blob/main/Dockerfi
 
 On startup, [the main progress](https://github.com/SaladTechnologies/storage-test/blob/main/src/main.ts) will conduct 48 data transfer tests measuring time and throughput: 2 directions × 3 tools × 8 buckets. 
 
-Data Size per Test: 300 MB, random data ( chosen to balance accuracy and efficiency, not MiB )
+- Data Size per Test: 300 MB, random data ( chosen to balance accuracy and efficiency, not MiB )
 
-Buckets: 8 buckets distributed across US West (1), US East (3), and EU Central (4), provided by AWS S3 (2), Cloudflare R2 (2), Backblaze B2 (3), and UltiHash (1).
+- Buckets: 8 buckets distributed across US West (1), US East (3), and EU Central (4), provided by AWS S3 (2), Cloudflare R2 (2), Backblaze B2 (3), and UltiHash (1)
 
-Tools: Rclone (1.69.2), Python with Boto3 (1.38.28), JavaScript/TypeScript with client-s3 and lib-storage (3.821.0).
+- Tools: Rclone (1.69.2), Python with Boto3 (1.38.28), JavaScript/TypeScript with client-s3 and lib-storage (3.821.0)
 
-Algorithm: chunked and parallel upload/download using a concurrency level of 10 and a chunk size of 10 MB.
+- Algorithm: chunked and parallel upload/download using a concurrency level of 10 and a chunk size of 10 MB
 
-Total Upload Volume: 7,200 MB (300 MB × 3 tools × 8 buckets).
+- Total Upload Volume: 7,200 MB (300 MB × 3 tools × 8 buckets)
 
-Total Download Volume: 7,200 MB (same as upload).
+- Total Download Volume: 7,200 MB (same as upload)
 
 
 ### Deployment on SaladCloud
