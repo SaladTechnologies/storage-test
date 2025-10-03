@@ -26,6 +26,7 @@ On startup, [the main progress](https://github.com/SaladTechnologies/storage-tes
 ### Deployment on SaladCloud
 
 Nodes: 200+ Salad consumer GPU nodes 
+
 Node Selection Criteria: using Python Speedtest and ping
 - Upload speed ≥ 20 Mbps, Download speed ≥ 50 Mbps
 - RTT to US West, US East, and EU regions < 500 ms
